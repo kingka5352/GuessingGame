@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="author" content="Jeongman Park" />
+  <title>Guessing Game</title>
+</head>
+
+<body>
+  <script>
+    let playAgain = true;
+
+    while (playAgain) {
+      const randomNumber = Math.floor(Math.random() * 10) + 1;
+      console.log("Correct answer (for testing):", randomNumber);
+
+      let guessCount = 0;
+      let guess = null;
+      let message = "Guess a number between 1 and 10.";
+
+      while (guess !== randomNumber) {
+        let input = prompt(message);
+        if (input === null) {
+          playAgain = false;
+          break;
+        }
+
+        guess = Number(input);
+        if (
+          isNaN(guess) ||
+          guess < 1 ||
+          guess > 10 ||
+          !Number.isInteger(guess)
+        ) {
+          continue; 
+        }
+
+        guessCount++;
+
+        if (guess < randomNumber) {
+          message = "Your guess was too low. Guess again.";
+        } else if (guess > randomNumber) {
+          message = "Your guess was too high. Guess again.";
+        } else {
+          alert(`You guessed it in ${guessCount} guesses!`);
+        }
+      }
+
+      if (!playAgain || guess !== randomNumber) break;
+
+      const again = prompt("Ready for another round? yes or no");
+      if (again === null || again.toLowerCase() !== "yes") {
+        playAgain = false;
+      }
+    }
+  </script>
+</body>
+
+</html>
